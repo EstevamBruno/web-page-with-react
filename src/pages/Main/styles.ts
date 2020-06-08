@@ -341,3 +341,21 @@ export const FooterContent = styled.div`
     margin: 0 24px;
   }
 `;
+
+export const Offline = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  background-color: #c15959;
+  color: #f0f0f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+
+  span {
+    margin-right: 8px;
+  }
+`;
