@@ -1,5 +1,12 @@
-import React from 'react';
-import { FiGithub, FiMail, FiLinkedin, FiPhone, FiArrowUpCircle } from 'react-icons/fi';
+import React, { useEffect, useState } from 'react';
+import {
+  FiGithub,
+  FiMail,
+  FiLinkedin,
+  FiPhone,
+  FiArrowUpCircle,
+  FiWifiOff
+} from 'react-icons/fi';
 
 import {
   Container,
@@ -16,7 +23,8 @@ import {
   Contact,
   ContactContent,
   Footer,
-  FooterContent
+  FooterContent,
+  Offline
 } from './styles';
 
 import ImgProfile from '../../assets/images/profile.jpg';
@@ -24,6 +32,16 @@ import ImgDevices from '../../assets/images/devices.png';
 import ImgPhone from '../../assets/images/phone.png';
 
 const Main: React.FC = () => {
+  const [online, setOnline] = useState<boolean>(navigator.onLine);
+
+  useEffect(() => {
+    window.addEventListener('online', handleNetworkChange);
+    window.addEventListener('offline', handleNetworkChange);
+  }, [])
+
+  function handleNetworkChange() {
+    setOnline(navigator.onLine);
+  }
 
   function goToTop() {
     document.body.scrollTop = 0;
@@ -139,6 +157,13 @@ const Main: React.FC = () => {
           </FooterContent>
         </Content>
       </Footer>
+    
+      { !online && (
+        <Offline>
+          <span>Você está offline</span> 
+          <FiWifiOff size={16} />
+        </Offline>
+      ) }
     </Container>
   );
 }
